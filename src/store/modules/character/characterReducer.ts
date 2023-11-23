@@ -7,7 +7,7 @@ const initialState = {
   error: null
 }
 
-export default function commentReducer(state: ICharacterState = initialState, action: Action):ICharacterState {
+export default function characterReducer(state: ICharacterState = initialState, action: Action):ICharacterState {
   switch(action.type) {
     case ActionType.GET_CHARACTERS_PENDING:
       return {

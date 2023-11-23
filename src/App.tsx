@@ -1,17 +1,16 @@
-import { Box, Container, Typography } from "@mui/material"
+import { Box, Container } from "@mui/material"
+import CardList from "./components/CardList"
 
 function App() {
-
   return (
     <Box
       width="100%"
-      height="100vh"
+      height="100%"
       bgcolor="#e4eaf4"
+      pb={'50px'}
     >
-      <Container>
-        <Typography fontSize="30px" component="p">
-          h1. Heading
-        </Typography>
+      <Container sx={{ margin: '0 auto'}}>
+        <CardList />
       </Container>
     </Box>
   )
