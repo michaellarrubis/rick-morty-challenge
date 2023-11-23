@@ -5386,6 +5386,11 @@ ts-invariant@^0.10.3:
   dependencies:
     tslib "^2.1.0"
 
+ts-jest-mock-import-meta@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ts-jest-mock-import-meta/-/ts-jest-mock-import-meta-1.1.0.tgz#496861ad70cba7743f3a135bfc195ea1e280849d"
+  integrity sha512-PTmdWGbDZOPh8vyZUmCTK5PjeD2X3YO25MQPTbm0lMlNFigUDwz3opwXOlsrgD0i5u/MpDX0gdZKoVONxVjVEw==
+
 ts-jest@^29.1.1:
   version "29.1.1"
   resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-29.1.1.tgz#f58fe62c63caf7bfcc5cc6472082f79180f0815b"

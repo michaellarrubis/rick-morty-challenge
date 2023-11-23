@@ -55,11 +55,10 @@ const CardList:FC = () => {
           <CircularProgress color="info" />
         </Box>
       )}
-      {nextPage && (
-        <Box display={'flex'} justifyContent={'center'} my={'50px'}>
-          <Button variant="contained" onClick={() => onLoadMore()}>MORE</Button>
-        </Box>
-      )}
+      
+      <Box display={'flex'} justifyContent={'center'} my={'50px'}>
+        <Button variant="contained" onClick={() => onLoadMore()} disabled={!(!isLoading && nextPage)}>MORE</Button>
+      </Box>
     </Box>
   )
 };
