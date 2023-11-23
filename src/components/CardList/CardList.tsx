@@ -1,16 +1,13 @@
 import { FC, useEffect } from "react";
 import { Box, Typography, Card, CardMedia, CardContent } from "@mui/material"
 
-// import { ICharacter } from "../../store/modules/character/interface";
+import { ICharacter } from "../../store/modules/character/interface";
 import { useCharacter } from "../../hooks/useCharacter";
 
 const CardList:FC = () => {
-  const { characters, getCharacters } = useCharacter();
-  useEffect(() => {
-    getCharacters(1);
-  }, []);
+  const { data } = useCharacter(1);
 
-  console.log({ characters });
+  console.log({ data });
 
   return (
     <Box pt={'50px'}>
@@ -18,8 +15,8 @@ const CardList:FC = () => {
         Rick & Morty Characters
       </Typography>
       <Box mt={'16px'} display={'flex'} gap={'20px'} flexWrap={'wrap'}>
-        {/* {data.characters.results.map((character: ICharacter) => (
-          <Card sx={{ width: '32%' }}>
+        {data?.characters.results.map((character: ICharacter) => (
+          <Card sx={{ width: '32%' }} key={character.id}>
             <CardMedia
               sx={{ height: 200 }}
               image={character.image}
@@ -35,7 +32,7 @@ const CardList:FC = () => {
               </Typography>
             </CardContent>
           </Card>
-        ))} */}
+        ))}
       </Box>
     </Box>
   )
