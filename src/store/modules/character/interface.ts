@@ -6,17 +6,18 @@ interface ICharacterLocation {
 export interface ICharacter {
   id: string
   name: string
-  status: string
-  species: string
-  type: string
-  gender: string
+  status?: string
+  species?: string
+  type?: string
+  gender?: string
   image: string
-  origin: ICharacterLocation
-  location: ICharacterLocation
+  origin?: ICharacterLocation
+  location?: ICharacterLocation
 }
 
 export interface ICharacterState {
-  list: ICharacter[] | [],
-  loading: boolean,
+  list: ICharacter[] | []
+  loading: boolean
+  nextPage: number | null
   error: string | null 
 }

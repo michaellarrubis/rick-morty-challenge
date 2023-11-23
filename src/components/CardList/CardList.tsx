@@ -1,13 +1,42 @@
 import { FC, useEffect } from "react";
-import { Box, Typography, Card, CardMedia, CardContent } from "@mui/material"
+import { Box, CircularProgress, Typography, Button } from "@mui/material";
+import CardItem from "components/CardItem/CardItem";
 
-import { ICharacter } from "../../store/modules/character/interface";
-import { useCharacter } from "../../hooks/useCharacter";
+import { useCharacter } from "hooks/useCharacter";
+import { ICharacter } from "store/modules/character/interface";
 
 const CardList:FC = () => {
-  const { data } = useCharacter(1);
+  const {
+    characters, 
+    nextPage,
+    isLoading,
+    _setNextPage,
+    _getCharacters, 
+    _setCharacters,
+} = useCharacter();
 
-  console.log({ data });
+  useEffect(() => {
+    onInitialRender();
+  }, []);
+
+  const onInitialRender = async () => {
+    if (!nextPage) return;
+    const data = await _getCharacters(nextPage);
+    // @ts-ignore
+    _setCharacters(data.results);
+    // @ts-ignore
+    _setNextPage(data.info.next);
+  }
+
+  const onLoadMore = async () => {
+    if (!nextPage) return;
+    const data = await _getCharacters(nextPage);
+    // @ts-ignore
+    const newCharacterList = [...characters, ...data.results];
+    _setCharacters(newCharacterList);
+    // @ts-ignore
+    _setNextPage(data.info.next);
+  }
 
   return (
     <Box pt={'50px'}>
@@ -15,25 +44,22 @@ const CardList:FC = () => {
         Rick & Morty Characters
       </Typography>
       <Box mt={'16px'} display={'flex'} gap={'20px'} flexWrap={'wrap'}>
-        {data?.characters.results.map((character: ICharacter) => (
-          <Card sx={{ width: '32%' }} key={character.id}>
-            <CardMedia
-              sx={{ height: 200 }}
-              image={character.image}
-              title={character.name}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {character.name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over 6,000
-                species, ranging across all continents except Antarctica
-              </Typography>
-            </CardContent>
-          </Card>
-        ))}
+        {characters?.length > 0 && (
+          characters.map((character: ICharacter) => (
+            <CardItem key={character.id} {...character} />
+          ))
+        )}
       </Box>
+      {isLoading && (
+        <Box display={'flex'} justifyContent={'center'} my={'10px'}>
+          <CircularProgress color="info" />
+        </Box>
+      )}
+      {nextPage && (
+        <Box display={'flex'} justifyContent={'center'} my={'50px'}>
+          <Button variant="contained" onClick={() => onLoadMore()}>MORE</Button>
+        </Box>
+      )}
     </Box>
   )
 };

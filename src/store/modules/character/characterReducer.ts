@@ -1,15 +1,16 @@
-import { ICharacterState } from "./interface";
-import { Action, ActionType } from "./characterActionTypes";
+import { ICharacterState } from "store/modules/character/interface";
+import { Action, ActionType } from "store/modules/character/characterActionTypes";
 
 const initialState = {
   list: [],
+  nextPage: 1,
   loading: false, 
   error: null
 }
 
 export default function characterReducer(state: ICharacterState = initialState, action: Action):ICharacterState {
   switch(action.type) {
-    case ActionType.GET_CHARACTERS_PENDING:
+    case ActionType.GET_CHARACTERS_LOADING:
       return {
         ...state,
         loading: action.payload 
@@ -20,7 +21,13 @@ export default function characterReducer(state: ICharacterState = initialState, 
         loading: false,
         list: action.payload
       }
-    case ActionType.GET_CHARACTERS_FAIL:
+    case ActionType.GET_CHARACTERS_NEXT_PAGE:
+      return {
+        ...state,
+        loading: false,
+        nextPage: action.payload
+      }
+    case ActionType.GET_CHARACTERS_FAILED:
       return {
         ...state,
         loading: false,

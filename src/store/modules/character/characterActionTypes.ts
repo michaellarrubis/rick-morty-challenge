@@ -1,13 +1,14 @@
-import { ICharacter } from "./interface";
+import { ICharacter } from "store/modules/character/interface";
 
 export enum ActionType {
-  GET_CHARACTERS_PENDING = "GET_CHARACTERS_PENDING",
+  GET_CHARACTERS_LOADING = "GET_CHARACTERS_LOADING",
   GET_CHARACTERS_SUCCESS = "GET_CHARACTERS_SUCCESS",
-  GET_CHARACTERS_FAIL = "GET_CHARACTERS_FAIL"
+  GET_CHARACTERS_FAILED = "GET_CHARACTERS_FAILED",
+  GET_CHARACTERS_NEXT_PAGE = "GET_CHARACTERS_NEXT_PAGE",
 }
 
 interface actionPending {
-  type: ActionType.GET_CHARACTERS_PENDING;
+  type: ActionType.GET_CHARACTERS_LOADING;
   payload: boolean
 }
 
@@ -17,8 +18,13 @@ interface actionSuccess {
 }
 
 interface actionFail {
-  type: ActionType.GET_CHARACTERS_FAIL;
+  type: ActionType.GET_CHARACTERS_FAILED;
   payload: string ;
 }
 
-export type Action = actionPending | actionSuccess | actionFail;
+interface actionNextPage {
+  type: ActionType.GET_CHARACTERS_NEXT_PAGE;
+  payload: number ;
+}
+
+export type Action = actionPending | actionSuccess | actionFail | actionNextPage;
