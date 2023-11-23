@@ -15,8 +15,9 @@ const CardItem:FC<ICharacter> = (character: ICharacter) => {
           {character.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          Species: {character.species} <br/>
+          Origin: {character.origin?.name} <br/>
+          Status: {character.status} <br/>
         </Typography>
       </CardContent>
     </Card>
