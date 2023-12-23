@@ -8,7 +8,7 @@ function App() {
       height="100%"
       pb={'50px'}
     >
-      <Container sx={{ margin: '0 auto'}}>
+      <Container sx={{ margin: '0 auto', display: 'block' }}>
         <CardList />
       </Container>
     </Box>
